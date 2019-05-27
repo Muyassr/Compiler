@@ -1,0 +1,23 @@
+Input String : id*(id+id)$
+
+Stack					    Input		Action
+[0]                                     id*(id+id)$ Shift by    s5
+[0, id, 5]                                *(id+id)$ Reduce by   F → id ( r6 )
+[0, F, 3]                                 *(id+id)$ Reduce by   T → F ( r4 )
+[0, T, 2]                                 *(id+id)$ Shift by    s7
+[0, T, 2, *, 7]                            (id+id)$ Shift by    s4
+[0, T, 2, *, 7, (, 4]                       id+id)$ Shift by    s5
+[0, T, 2, *, 7, (, 4, id, 5]                  +id)$ Reduce by   F → id ( r6 )
+[0, T, 2, *, 7, (, 4, F, 3]                   +id)$ Reduce by   T → F ( r4 )
+[0, T, 2, *, 7, (, 4, T, 2]                   +id)$ Reduce by   E → T ( r2 )
+[0, T, 2, *, 7, (, 4, E, 8]                   +id)$ Shift by    s6
+[0, T, 2, *, 7, (, 4, E, 8, +, 6]                 id)$ Shift by    s5
+[0, T, 2, *, 7, (, 4, E, 8, +, 6, id, 5]                   )$ Reduce by   F → id ( r6 )
+[0, T, 2, *, 7, (, 4, E, 8, +, 6, F, 3]                   )$ Reduce by   T → F ( r4 )
+[0, T, 2, *, 7, (, 4, E, 8, +, 6, T, 9]                   )$ Reduce by   E → E+T ( r1 )
+[0, T, 2, *, 7, (, 4, E, 8]                      )$ Shift by    s11
+[0, T, 2, *, 7, (, 4, E, 8, ), 11]                    $ Reduce by   F → (E) ( r5 )
+[0, T, 2, *, 7, F, 10]                            $ Reduce by   F → (E) ( r5 )
+[0, F, 3]                                         $ Reduce by   T → F ( r4 )
+[0, T, 2]                                         $ Reduce by   E → T ( r2 )
+[0, E, 1]                                         $ ACCEPT
